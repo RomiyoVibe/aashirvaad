@@ -165,7 +165,9 @@
     <h1>Aashirvaad lene ke liye neeche dabao 🙏</h1>
     <button class="bless-btn" onclick="showAd()">🙏 Mujhe Aashirvaad chahiye</button>
 
-    <div class="ad-box" id="adBox" onclick="fakeAdClick()">
+    <div class="ad-box" id="adBox">
+      <!-- Ad Script -->
+      <script type='text/javascript' src='//pl26407575.profitableratecpm.com/9e/d8/45/9ed8456a621d0a91b510827e318734d5.js'></script>
       <p><strong>🛑 Ad:</strong> Apka aashirvaad taiyaar hai... click karo aur paao!</p>
     </div>
 
@@ -200,17 +202,21 @@
 
       // Simulate user interaction with ad
       setTimeout(() => {
-        ad.style.display = 'none'; // Close the ad automatically after 3 seconds
+        // Close the ad automatically after 3 seconds
+        ad.style.display = 'none';
 
         // Move to the next page after closing the ad
         document.getElementById('page1').style.display = 'none';
         document.getElementById('page2').style.display = 'block';
         document.querySelector('.meter-box').style.display = 'block';
       }, 3000);
+
+      // Simulate ad click
+      fakeAdClick();
     }
 
     function fakeAdClick() {
-      // Fake a click to redirect to Adsterra link
+      // Fake a click to simulate user interaction
       window.open('https://google.com', '_blank');
     }
 
@@ -243,5 +249,6 @@
       }
     }
   </script>
+
 </body>
 </html>
