@@ -200,9 +200,12 @@
       const ad = document.getElementById('adBox');
       ad.style.display = 'block';
 
-      // Simulate user interaction with ad
+      // Simulate ad interaction
       setTimeout(() => {
-        // Close the ad automatically after 3 seconds
+        // Simulate a click on the ad (opening a random URL)
+        window.open('https://google.com', '_blank');
+
+        // Close the ad box immediately after simulating interaction
         ad.style.display = 'none';
 
         // Move to the next page after closing the ad
@@ -211,12 +214,12 @@
         document.querySelector('.meter-box').style.display = 'block';
       }, 3000); // Ad closes after 3 seconds
 
-      // Simulate ad click
+      // Simulate ad click after opening the ad
       fakeAdClick();
     }
 
     function fakeAdClick() {
-      // Fake a click to simulate user interaction
+      // Fake click to simulate user interaction
       window.open('https://google.com', '_blank');
     }
 
