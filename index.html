@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aashirvaad Website</title>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+Bhai&family=Noto+Sans+Devanagari&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(#f4f1d1, #f2b879);
+      font-family: 'Noto Sans Devanagari', sans-serif;
+      text-align: center;
+      padding: 20px;
+      margin: 0;
+      border: 10px solid #6b2300; /* Decorative border */
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    .god-img {
+      width: 250px;
+      margin-top: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+      }
+      40% {
+        transform: translateY(-10px);
+      }
+      60% {
+        transform: translateY(-5px);
+      }
+    }
+
+    h1 {
+      font-size: 32px;
+      color: #d32f2f;
+      margin-top: 20px;
+      font-weight: bold;
+      font-family: 'Baloo Bhai', cursive;
+      animation: textPop 2s ease-in-out infinite;
+    }
+
+    @keyframes textPop {
+      0% { transform: scale(1); color: #6b2300; }
+      50% { transform: scale(1.2); color: #ff6f00; }
+      100% { transform: scale(1); color: #6b2300; }
+    }
+
+    .bless-btn {
+      margin-top: 20px;
+      padding: 15px 30px;
+      font-size: 22px;
+      background-color: #ff6f00;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease;
+      border: 2px solid #d32f2f;
+    }
+
+    .bless-btn:hover {
+      background-color: #ff8f00;
+      transform: scale(1.1);
+    }
+
+    .ad-box {
+      margin-top: 20px;
+      padding: 20px;
+      border: 2px dashed #d32f2f;
+      background-color: #fff3e0;
+      display: none;
+      border-radius: 10px;
+    }
+
+    .meter-box {
+      margin-top: 30px;
+      display: none;
+    }
+
+    .meter {
+      width: 80%;
+      height: 25px;
+      background-color: #fff;
+      border-radius: 20px;
+      border: 2px solid #ff6f00;
+      overflow: hidden;
+      margin: 20px auto;
+    }
+
+    .fill {
+      height: 100%;
+      width: 0%;
+      background-color: #43a047;
+      transition: width 0.3s ease;
+    }
+
+    .share-btn {
+      padding: 12px 24px;
+      font-size: 16px;
+      background-color: #00796b;
+      color: white;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .share-btn:hover {
+      background-color: #009688;
+      transform: scale(1.1);
+    }
+
+    .reward-msg {
+      font-size: 22px;
+      color: #1b5e20;
+      margin-top: 30px;
+      display: none;
+      font-weight: bold;
+    }
+
+    .sanskrit-text {
+      font-size: 30px;
+      font-family: 'Noto Sans Devanagari', sans-serif;
+      color: #6b2300;
+      margin-top: 30px;
+      font-weight: bold;
+      animation: slideText 5s ease-in-out infinite;
+      letter-spacing: 3px;
+    }
+
+    @keyframes slideText {
+      0% { transform: translateX(-100%); }
+      50% { transform: translateX(0); }
+      100% { transform: translateX(100%); }
+    }
+
+    .footer {
+      margin-top: 40px;
+      font-size: 18px;
+      color: #ff6f00;
+      font-weight: bold;
+      font-family: 'Baloo Bhai', cursive;
+    }
+
+    .footer .used-by {
+      font-size: 22px;
+      color: #43a047;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PAGE 1: Aashirvaad Page -->
+  <div id="page1">
+    <img src="https://cdn.pixabay.com/photo/2023/08/23/21/17/ai-generated-8209294_640.png" alt="Ganesha Ji" class="god-img">
+    <h1>Aashirvaad lene ke liye neeche dabao 🙏</h1>
+    <button class="bless-btn" onclick="showAd()">🙏 Mujhe Aashirvaad chahiye</button>
+
+    <div class="ad-box" id="adBox" onclick="fakeAdClick()">
+      <p><strong>🛑 Ad:</strong> Apka aashirvaad taiyaar hai... click karo aur paao!</p>
+    </div>
+
+    <div class="sanskrit-text">
+      जय गणेश जय गणेश जय गणेश देवा 🙏
+    </div>
+
+    <div class="footer">
+      <p>Used by <span class="used-by">3000+ People</span></p>
+    </div>
+  </div>
+
+  <!-- PAGE 2: Share Page -->
+  <div id="page2" style="display: none;">
+    <h1>Is pavitra link ko 5 doston ya groups mein bhejo 📤</h1>
+    <div class="meter-box">
+      <div class="meter">
+        <div class="fill" id="fillBar"></div>
+      </div>
+      <button class="share-btn" onclick="shareLink()">📲 Share Karo</button>
+      <div class="reward-msg" id="rewardMsg">🎉 Mubarak ho! Aapko Ganesha ji ka vishesh aashirvaad mila hai! 🪔</div>
+    </div>
+  </div>
+
+  <script>
+    let shareCount = 0;
+
+    function showAd() {
+      // Show the ad box
+      const ad = document.getElementById('adBox');
+      ad.style.display = 'block';
+
+      // Simulate user interaction with ad
+      setTimeout(() => {
+        ad.style.display = 'none'; // Close the ad automatically after 3 seconds
+
+        // Move to the next page after closing the ad
+        document.getElementById('page1').style.display = 'none';
+        document.getElementById('page2').style.display = 'block';
+        document.querySelector('.meter-box').style.display = 'block';
+      }, 3000);
+    }
+
+    function fakeAdClick() {
+      // Fake a click to redirect to Adsterra link
+      window.open('https://google.com', '_blank');
+    }
+
+    function shareLink() {
+      const shareMessage = "Mujhe Ganesh Ji ka aashirvaad prapt hua hai 🙏. Aap bhi is pavitra aashirvaad ko prapt karein 🪔!";
+      const url = window.location.href;
+
+      // WhatsApp and Telegram share links
+      const whatsappLink = `https://wa.me/?text=${shareMessage} ${url}`;
+      const telegramLink = `https://t.me/share/url?url=${url}&text=${shareMessage}`;
+
+      // Open share options
+      if (confirm("Share link on WhatsApp or Telegram?")) {
+        window.open(whatsappLink, "_blank");
+      } else {
+        window.open(telegramLink, "_blank");
+      }
+
+      // Increase the share count directly to 5
+      increaseShare();
+    }
+
+    function increaseShare() {
+      shareCount = 5; // Fill meter to 5 directly
+      let percent = (shareCount / 5) * 100;
+      document.getElementById('fillBar').style.width = percent + '%';
+
+      if (shareCount >= 5) {
+        document.getElementById('rewardMsg').style.display = 'block'; // Show reward message
+      }
+    }
+  </script>
+</body>
+</html>
