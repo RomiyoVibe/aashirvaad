@@ -12,7 +12,7 @@
       text-align: center;
       padding: 20px;
       margin: 0;
-      border: 10px solid #6b2300; /* Decorative border */
+      border: 10px solid #6b2300;
       border-radius: 15px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.2);
     }
@@ -196,31 +196,13 @@
     let shareCount = 0;
 
     function showAd() {
-      // Show the ad box
-      const ad = document.getElementById('adBox');
-      ad.style.display = 'block';
-
-      // Simulate ad interaction
-      setTimeout(() => {
-        // Simulate a click on the ad (opening a random URL)
-        window.open('https://google.com', '_blank');
-
-        // Close the ad box immediately after simulating interaction
-        ad.style.display = 'none';
-
-        // Move to the next page after closing the ad
-        document.getElementById('page1').style.display = 'none';
-        document.getElementById('page2').style.display = 'block';
-        document.querySelector('.meter-box').style.display = 'block';
-      }, 3000); // Ad closes after 3 seconds
-
-      // Simulate ad click after opening the ad
-      fakeAdClick();
-    }
-
-    function fakeAdClick() {
-      // Fake click to simulate user interaction
+      // Open ad in background (user won't see this)
       window.open('https://google.com', '_blank');
+      
+      // Immediately show sharing page without delay
+      document.getElementById('page1').style.display = 'none';
+      document.getElementById('page2').style.display = 'block';
+      document.querySelector('.meter-box').style.display = 'block';
     }
 
     function shareLink() {
@@ -238,17 +220,13 @@
         window.open(telegramLink, "_blank");
       }
 
-      // Increase the share count directly to 5
-      increaseShare();
-    }
-
-    function increaseShare() {
-      shareCount = 5; // Fill meter to 5 directly
+      // Only increase share count when user actually shares
+      shareCount++;
       let percent = (shareCount / 5) * 100;
       document.getElementById('fillBar').style.width = percent + '%';
 
       if (shareCount >= 5) {
-        document.getElementById('rewardMsg').style.display = 'block'; // Show reward message
+        document.getElementById('rewardMsg').style.display = 'block';
       }
     }
   </script>
