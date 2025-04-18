@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Aashirvaad Website</title>
+  <title>Ganesh Ji Ka Aashirvaad</title>
   <link href="https://fonts.googleapis.com/css2?family=Baloo+Bhai&family=Noto+Sans+Devanagari&display=swap" rel="stylesheet">
   <style>
     body {
@@ -12,9 +12,11 @@
       text-align: center;
       padding: 20px;
       margin: 0;
-      border: 10px solid #6b2300; /* Decorative border */
+      border: 10px solid #6b2300;
       border-radius: 15px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      min-height: 100vh;
+      box-sizing: border-box;
     }
 
     .god-img {
@@ -26,15 +28,9 @@
     }
 
     @keyframes bounce {
-      0%, 20%, 50%, 80%, 100% {
-        transform: translateY(0);
-      }
-      40% {
-        transform: translateY(-10px);
-      }
-      60% {
-        transform: translateY(-5px);
-      }
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-10px); }
+      60% { transform: translateY(-5px); }
     }
 
     h1 {
@@ -111,6 +107,7 @@
       border-radius: 25px;
       cursor: pointer;
       transition: transform 0.3s ease;
+      margin-top: 15px;
     }
 
     .share-btn:hover {
@@ -124,6 +121,13 @@
       margin-top: 30px;
       display: none;
       font-weight: bold;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
     }
 
     .sanskrit-text {
@@ -155,6 +159,22 @@
       color: #43a047;
       font-weight: bold;
     }
+
+    /* Loading spinner for ad */
+    .loader {
+      border: 5px solid #f3f3f3;
+      border-top: 5px solid #ff6f00;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 1s linear infinite;
+      margin: 20px auto;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
   </style>
 </head>
 <body>
@@ -162,13 +182,11 @@
   <!-- PAGE 1: Aashirvaad Page -->
   <div id="page1">
     <img src="https://cdn.pixabay.com/photo/2023/08/23/21/17/ai-generated-8209294_640.png" alt="Ganesha Ji" class="god-img">
-    <h1>Aashirvaad lene ke liye neeche dabao 🙏</h1>
+    <h1>Neeche wale button ko dabake back ka button dabao 🙏</h1>
     <button class="bless-btn" onclick="showAd()">🙏 Mujhe Aashirvaad chahiye</button>
 
     <div class="ad-box" id="adBox">
-      <!-- Ad Script -->
-      <script type='text/javascript' src='//pl26407575.profitableratecpm.com/9e/d8/45/9ed8456a621d0a91b510827e318734d5.js'></script>
-      <p><strong>🛑 Ad:</strong> Apka aashirvaad taiyaar hai... click karo aur paao!</p>
+      <p><strong>🛑 Ad:</strong> Apka aashirvaad taiyaar hai... dhanyavaad!</p>
     </div>
 
     <div class="sanskrit-text">
@@ -194,64 +212,118 @@
 
   <script>
     let shareCount = 0;
+    let adWindow = null;
 
     function showAd() {
-      // Show the ad box
-      const ad = document.getElementById('adBox');
-      ad.style.display = 'block';
-
-      // Simulate ad interaction
+      // Show loading indicator in main window
+      document.getElementById('adBox').style.display = 'block';
+      
+      // Open ad in new window
+      adWindow = window.open('', '_blank', 'width=600,height=500');
+      adWindow.document.write(`
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <title>Loading Aashirvaad...</title>
+          <style>
+            body { 
+              font-family: Arial, sans-serif; 
+              text-align: center; 
+              padding: 20px; 
+              background: #fff3e0;
+            }
+            .loader {
+              border: 5px solid #f3f3f3;
+              border-top: 5px solid #ff6f00;
+              border-radius: 50%;
+              width: 50px;
+              height: 50px;
+              animation: spin 1s linear infinite;
+              margin: 40px auto;
+            }
+            @keyframes spin {
+              0% { transform: rotate(0deg); }
+              100% { transform: rotate(360deg); }
+            }
+          </style>
+        </head>
+        <body>
+          <h2 style="color:#d32f2f;">Aapka Aashirvaad Load Ho Raha Hai</h2>
+          <div class="loader"></div>
+          <p>Kripya prateeksha karein...</p>
+          <script type='text/javascript' src='//pl26407575.profitableratecpm.com/9e/d8/45/9ed8456a621d0a91b510827e318734d5.js'><\/script>
+        </body>
+        </html>
+      `);
+      
+      // Switch to share page in main window
       setTimeout(() => {
-        // Simulate a click on the ad (opening a random URL)
-        window.open('https://google.com', '_blank');
-
-        // Close the ad box immediately after simulating interaction
-        ad.style.display = 'none';
-
-        // Move to the next page after closing the ad
         document.getElementById('page1').style.display = 'none';
         document.getElementById('page2').style.display = 'block';
         document.querySelector('.meter-box').style.display = 'block';
-      }, 3000); // Ad closes after 3 seconds
-
-      // Simulate ad click after opening the ad
-      fakeAdClick();
-    }
-
-    function fakeAdClick() {
-      // Fake click to simulate user interaction
-      window.open('https://google.com', '_blank');
+      }, 1000);
+      
+      // Close ad window after 8 seconds
+      setTimeout(() => {
+        if(adWindow && !adWindow.closed) {
+          adWindow.close();
+        }
+      }, 8000);
     }
 
     function shareLink() {
       const shareMessage = "Mujhe Ganesh Ji ka aashirvaad prapt hua hai 🙏. Aap bhi is pavitra aashirvaad ko prapt karein 🪔!";
       const url = window.location.href;
-
-      // WhatsApp and Telegram share links
-      const whatsappLink = `https://wa.me/?text=${shareMessage} ${url}`;
-      const telegramLink = `https://t.me/share/url?url=${url}&text=${shareMessage}`;
-
-      // Open share options
-      if (confirm("Share link on WhatsApp or Telegram?")) {
-        window.open(whatsappLink, "_blank");
+      
+      // Try to detect mobile devices
+      const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+      
+      if(isMobile) {
+        // For mobile devices
+        if(navigator.share) {
+          navigator.share({
+            title: 'Ganesh Ji Ka Aashirvaad',
+            text: shareMessage,
+            url: url
+          }).then(() => {
+            increaseShare();
+          }).catch(err => {
+            fallbackShare();
+          });
+        } else {
+          fallbackShare();
+        }
       } else {
-        window.open(telegramLink, "_blank");
+        // For desktop
+        fallbackShare();
       }
-
-      // Increase the share count directly to 5
-      increaseShare();
+      
+      function fallbackShare() {
+        const whatsappLink = `https://wa.me/?text=${encodeURIComponent(shareMessage + " " + url)}`;
+        const telegramLink = `https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(shareMessage)}`;
+        
+        if(confirm("Kya aap WhatsApp pe share karna chahenge?")) {
+          window.open(whatsappLink, "_blank");
+        } else {
+          window.open(telegramLink, "_blank");
+        }
+        increaseShare();
+      }
     }
 
     function increaseShare() {
-      shareCount = 5; // Fill meter to 5 directly
+      shareCount = Math.min(shareCount + 1, 5);
       let percent = (shareCount / 5) * 100;
       document.getElementById('fillBar').style.width = percent + '%';
 
-      if (shareCount >= 5) {
-        document.getElementById('rewardMsg').style.display = 'block'; // Show reward message
+      if(shareCount >= 5) {
+        document.getElementById('rewardMsg').style.display = 'block';
+        // Vibrate if supported
+        if(navigator.vibrate) {
+          navigator.vibrate([200, 100, 200]);
+        }
       }
     }
   </script>
-
 </body>
 </html>
